@@ -1,4 +1,4 @@
-# meet app
+# You Herd?
 <h2>Deployed at https://jpark42.github.io/meet/</h2>
 
 <h2>Description</h2>
