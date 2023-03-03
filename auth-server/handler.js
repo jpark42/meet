@@ -25,6 +25,7 @@ const credentials = {
   javascript_origins: ["https://jpark42.github.io", "http://localhost:3000"],
 };
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
+
 const oAuth2Client = new google.auth.OAuth2(
   client_id,
   client_secret,
@@ -94,8 +95,8 @@ return new Promise((resolve, reject) => {
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify(token),
     };
