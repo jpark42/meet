@@ -50,8 +50,9 @@ functions:
     handler: handler.getCalendarEvents
     events:
       - http:
-        path: api/get-events/{access_token}
-        method: get
+          path: api/get-events/{access_token}
+          method: get
+          cors: true
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
