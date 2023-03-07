@@ -106,7 +106,67 @@ return new Promise((resolve, reject) => {
     console.error(err);
     return {
       statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
       body: JSON.stringify(err),
     };
   });
 }
+
+module.exports.getCalendarEvents = async (event) => {
+
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0]
+  );
+
+  //delcaring an access_token variable and retreiving the access_token 
+  const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
+  //desctructuing access_token here
+  oAuth2Client.setCredentials({ access_token });
+
+  return new Promise ( (resolve, reject) => { 
+
+    calendar.events.list(
+      {
+        calendarId: calendar_id,
+        auth: oAuth2Client,
+        timeMin: new Date().toISOString(),
+        singleEvents: true,
+        orderBy: "startTime",
+      },
+      (error, response) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(response);
+        }
+      }
+    );  
+  })
+  // results is the data from the calendar app. Calendar.events.list callback is stored in the resolve(response) and then passed as results
+  .then( results => {
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+      },
+      // stringify the results object into a more readable format
+      body: JSON.stringify({ events: results.data.items })
+    };
+  })
+  .catch((err) => {
+    // Handle error
+    console.error(err);
+    return {
+      statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify(err),
+    };
+  });
+};
