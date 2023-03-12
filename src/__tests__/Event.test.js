@@ -3,3 +3,75 @@ import { shallow } from 'enzyme';
 import Event from '../Event';
 import { mockData } from '../mock-data';
 
+describe('<Event /> componenent', () => {
+    let EventWrapper;
+    const event = mockData[0];
+    beforeAll(() => {
+        EventWrapper = shallow(<Event event={event} />);
+    })
+
+    // renders the event component
+    test('renders the component', () => {
+        expect(EventWrapper).toBeDefined();
+    });
+
+    // renders the h2 summary correctly
+    test('summary is rendered correctly in a h2 tag', () => {
+        const summary = EventWrapper.find('h2.summary');
+        expect(summary).toHaveLength(1);
+        expect(summary.text()).toBe(event.summary);
+    });
+
+    // checks the start time of location is rendered
+    test('event start time is rendered correctly', () => {
+        const eventStart = EventWrapper.find('p.event-start');
+        expect(eventStart).toHaveLength(1);
+        expect(eventStart.text()).toBe(new Date(event.start.dateTime).toString());
+      });
+
+    // checks if the location is rendered
+    test('event location is rendered correctly', () => {
+        const eventLocation = EventWrapper.find('p.event-location');
+        expect(eventLocation).toHaveLength(1);
+        expect(eventLocation.text()).toBe(`@${event.summary} | ${event.location}`);
+       
+      });
+
+
+    // checks if the button is collapsed by default
+    test('renders collapsed by default', () => {
+        expect(EventWrapper.state("collapsed")).toBe(true);
+    });
+
+    // renders collapsed view
+    test('the collapsed view is rendered correctly', () => {
+        expect(EventWrapper.find('h3.about')).toHaveLength(0);
+        expect(EventWrapper.find('a.link')).toHaveLength(0);
+        expect(EventWrapper.find('p.description')).toHaveLength(0);
+    });
+
+    // user can view event details when clicking button
+    test('user can expand an event when clicking show details button', () => {
+        const detailsButton = EventWrapper.find('button.details-btn');
+        expect(detailsButton.text()).toBe('show details');
+        detailsButton.simulate('click');
+        expect(EventWrapper.state('collapsed')).toBe(false);
+    })
+
+    // renders expanded view
+    test('event details is expanded and rendered correctly', () => {
+        expect(EventWrapper.find('h3.about')).toHaveLength(1);
+        expect(EventWrapper.find('a.link')).toHaveLength(1);
+        expect(EventWrapper.find('p.description')).toHaveLength(1);
+    
+    });
+
+    // user can not view event details when clicking button
+    test('user can collapse an event when clicking hide details button', () => {
+        const detailsButton = EventWrapper.find('button.details-btn');
+        expect(detailsButton.text()).toBe('hide details');
+        detailsButton.simulate('click');
+        expect(EventWrapper.state('collapsed')).toBe(true);
+    })
+
+});
