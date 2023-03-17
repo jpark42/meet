@@ -8,7 +8,7 @@ describe('<CitySearch /> component', () => {
 let locations, CitySearchWrapper;
 beforeAll(()=> {
   locations = extractLocations(mockData);//passing superset of locations as a prop to the CitySearch component
-  CitySearchWrapper = shallow(<CitySearch locations={locations}/>);
+  CitySearchWrapper = shallow(<CitySearch locations={locations} updateEvents={() => {}} />);
 });
 
 

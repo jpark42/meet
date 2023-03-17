@@ -1,3 +1,5 @@
+import { mockData } from './mock-data';
+
 /**
  *
  * param {*} events:
@@ -10,4 +12,9 @@ export const extractLocations = (events) => {
     var extractLocations = events.map((event) => event.location);
     var locations = [...new Set(extractLocations)];
     return locations;
+  };
+
+  //function doesnt current have any async code yet, but will add ajax request to proper serverless endpoint later
+  export const getEvents = async () => {
+    return mockData;
   };

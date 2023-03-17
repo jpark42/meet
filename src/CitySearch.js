@@ -22,6 +22,9 @@ class CitySearch extends Component {
     this.setState({
       query: suggestion
     });
+    
+    //handItemClicked now async, being able to be used in testing
+    this.props.updateEvents(suggestion);
   }
   render() {
     return (
@@ -39,7 +42,7 @@ class CitySearch extends Component {
                 onClick={() => this.handleItemClicked(suggestion)}
                 >{suggestion}</li> //assigning a key to each suggestion
               ))}
-              <li key="all">
+              <li onClick={() => this.handleItemClicked("all")}>
                 <b>See all cities</b>
               </li>
             </ul>
