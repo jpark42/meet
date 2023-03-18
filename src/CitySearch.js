@@ -12,7 +12,7 @@ class CitySearch extends Component {
   handleInputChanged = (event) => {
     const value = event.target.value;
     const suggestions = this.props.locations.filter((location) => {
-      return location.toUpperCase().indexOf(value.toUpperCase()) >-1;
+      return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     })
     this.setState({ 
       query: value,
@@ -24,7 +24,6 @@ class CitySearch extends Component {
       query: suggestion,
       showSuggestions: false
     });
-    
     //handItemClicked now async, being able to be used in testing
     this.props.updateEvents(suggestion);
   }
@@ -40,7 +39,7 @@ class CitySearch extends Component {
                 //callback function will set showSuggestions state to be true
                 onFocus={() => { this.setState({ showSuggestions: true }) }}
             />
-            <ul className = "suggestions" style={this.state.showSuggestions ? {}: {display: "none"}}>
+            <ul className = "suggestions" style={this.state.showSuggestions ? {}: {display: 'none'}}>
               {this.state.suggestions.map((suggestion) => (
                 <li 
                 key={suggestion}

@@ -43,7 +43,7 @@ const removeQuery = () => {
   } else {
     newurl = window.location.protocol + "//" + window.location.host;
     window.history.pushState("", "", newurl);
-  }
+  };
 };
 
 //get new token if a token doesnt exist or is invalid
@@ -71,7 +71,7 @@ export const getEvents = async () => {
   if (window.location.href.startsWith('http://localhost')) { //if using localhost: return mockData, else: real API data
     NProgress.done();
     return mockData;
-}
+};
 
   const token = await getAccessToken();
 
@@ -86,7 +86,7 @@ export const getEvents = async () => {
     }
     NProgress.done();
     return result.data.events;
-  }
+  };
 };
 
 //
@@ -107,10 +107,10 @@ export const getAccessToken = async () => {
       );
       const { authUrl } = results.data;
       return (window.location.href = authUrl);
-    }
+    };
     return code && getToken(code);
-  }
+  };
   return accessToken;
     
-}
+};
 

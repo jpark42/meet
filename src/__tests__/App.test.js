@@ -19,7 +19,7 @@ test('test description', () => {
 describe('<App /> component', () => {
     let AppWrapper;
     beforeAll(()=> {
-        AppWrapper = shallow(<App />); //beforeAll() executes code before each one of your tests, so you odn't have to write it repeatedly
+        AppWrapper = shallow(<App />);
     });
 
     test('render list of events', () => {
