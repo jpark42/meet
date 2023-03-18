@@ -25,7 +25,10 @@ const checkToken = async (accessToken) => {
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   )
     .then((res) => res.json())
-    .catch((error) => error.json());
+    .catch((error) => {
+      error.json();
+      console.log(error.json);
+    });
 
   return result;
 };
@@ -34,14 +37,10 @@ const checkToken = async (accessToken) => {
 //Checks if there is a path, then build the URL with the current path (or build the URL without a path using window.historypushState())
 const removeQuery = () => {
   if (window.history.pushState && window.location.pathname) {
-    var newurl =
-      window.location.protocol +
-      "//" +
-      window.location.host +
-      window.location.pathname;
+    var newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
     window.history.pushState("", "", newurl);
   } else {
-    newurl = window.location.protocol + "//" + window.location.host;
+    newurl = `${window.location.protocol}//${window.location.host}`;
     window.history.pushState("", "", newurl);
   };
 };
@@ -50,13 +49,14 @@ const removeQuery = () => {
 //This function takes your code and encodes it using encodeURIComponent, then uses the encoded code to get your token.
 const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code);
+  const getTokenLambdaEP = 'https://geyqndkg8l.execute-api.us-east-1.amazonaws.com/dev/api/token';
   const { access_token } = await fetch(
-    'https://geyqndkg8l.execute-api.us-east-1.amazonaws.com/dev/api/token/' + encodeCode
+    `${getTokenLambdaEP}/${encodeCode}`
   )
     .then((res) => {
       return res.json();
     })
-    .catch((error) => error);
+    .catch((error) => console.log(error));
 
   access_token && localStorage.setItem("access_token", access_token);
 
@@ -77,10 +77,13 @@ export const getEvents = async () => {
 
   if (token) {
     removeQuery();
-    const url = 'https://geyqndkg8l.execute-api.us-east-1.amazonaws.com/dev/api/get-events/' + token;
+    const getEventsLambdaEP = 'https://geyqndkg8l.execute-api.us-east-1.amazonaws.com/dev/api/get-events';
+    const url =  `${getEventsLambdaEP}/${token}`;
     const result = await axios.get(url);
     if (result.data) {
+      // send events to extractLocations() to get all available locations
       var locations = extractLocations(result.data.events);
+      // save results of API call in local storage (events & locations)
       localStorage.setItem("lastEvents", JSON.stringify(result.data));
       localStorage.setItem("locations", JSON.stringify(locations));
     }
@@ -91,16 +94,21 @@ export const getEvents = async () => {
 
 //
 export const getAccessToken = async () => {
+  // check if token exists in local storage of the user
   const accessToken = localStorage.getItem('access_token');
 
   //check if an accessToken is found. If no token found, then check for authorization code
   //if no authorization code found, user is automatically redirected to the Google Authorization screen, where they can sign in again and retrieve their code
   const tokenCheck = accessToken && (await checkToken(accessToken));
 
+  // if token is not found or is not valid
   if (!accessToken || tokenCheck.error) {
+    // remove any version of the token if it exists
     await localStorage.removeItem("access_token");
+    // check for authorization code
     const searchParams = new URLSearchParams(window.location.search);
     const code = await searchParams.get("code");
+    // if no authorization code is found, user is redirected to Google Auth screen where they can sign in and receive their code
     if (!code) {
       const results = await axios.get(
         "https://geyqndkg8l.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url"
