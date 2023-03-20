@@ -43,7 +43,7 @@ class App extends Component {
     if (location) {
       getEvents().then((events) => {
         //check if locationsEvents value is "all", otherwise filter the event list
-        const locationEvents = (location === "all") ? 
+        const locationEvents = (location === 'all') ? 
           events :
           events.filter((event) => event.location === location);
         const eventsToShow = locationEvents.slice(0, eventCount);
