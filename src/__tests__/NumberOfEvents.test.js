@@ -13,10 +13,10 @@ describe("<NumberOfEvents /> component", () => {
         expect(NumberOfEventsWrapper).toBeDefined();
     });
 
-    // test 2: the default number of events shown is 32
-    test('user sees 32 events by default', () => {
+    // test 2: the default number of events shown is 30
+    test('user sees 30 events by default', () => {
         expect(NumberOfEventsWrapper.find('input.number').prop('type')).toBe('number');
-        expect(NumberOfEventsWrapper.state('number')).toBe(32);
+        expect(NumberOfEventsWrapper.state('number')).toBe(30);
     })
 
     // test 3: the input function is rendered correctly
@@ -27,11 +27,11 @@ describe("<NumberOfEvents /> component", () => {
 
     // test 4: the component changes state when user inputs value (10)
     test('change state when user input changes', () => {
-        expect(NumberOfEventsWrapper.state('number')).toBe(32);
+        expect(NumberOfEventsWrapper.state('number')).toBe(30);
         NumberOfEventsWrapper.find('input.number').simulate('change', 
             { target: { value: 10 },
         });
-        expect(NumberOfEventsWrapper.state('number')).toBe('10');
+        expect(NumberOfEventsWrapper.state('number')).toBe(10);
     });
 
     /*
