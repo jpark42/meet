@@ -52,26 +52,46 @@ describe('<Event /> componenent', () => {
 
     // user can view event details when clicking button
     test('user can expand an event when clicking show details button', () => {
-        const detailsButton = EventWrapper.find('button.details-btn');
-        expect(detailsButton.text()).toBe('show details');
+        const detailsButton = EventWrapper.find('button.details-button');
+        expect(detailsButton.text()).toBe('Details');
         detailsButton.simulate('click');
         expect(EventWrapper.state('collapsed')).toBe(false);
     })
 
-    // renders expanded view
-    test('event details is expanded and rendered correctly', () => {
-        expect(EventWrapper.find('h3.about')).toHaveLength(1);
-        expect(EventWrapper.find('a.link')).toHaveLength(1);
-        expect(EventWrapper.find('p.description')).toHaveLength(1);
+    // // renders expanded view
+    // test('event details is expanded and rendered correctly', () => {
+    //     expect(EventWrapper.find('h3.about')).toHaveLength(1);
+    //     expect(EventWrapper.find('a.link')).toHaveLength(1);
+    //     expect(EventWrapper.find('p.description')).toHaveLength(1);
     
+    // });
+
+    test('clicking Details button changes the state', () => {
+        EventWrapper.setState({ collapsed: true });
+        EventWrapper.find('.details-button').simulate('click');
+        expect(EventWrapper.state('collapsed')).toBe(false);
     });
 
-    // user can not view event details when clicking button
-    test('user can collapse an event when clicking hide details button', () => {
-        const detailsButton = EventWrapper.find('button.details-btn');
-        expect(detailsButton.text()).toBe('hide details');
-        detailsButton.simulate('click');
+    test('event__Details rendered when !collapsed', () => {
+        EventWrapper.setState({ collapsed: false });
+        expect(EventWrapper.find('.event__Details')).toHaveLength(1);
+        expect(EventWrapper.find('.event').children()).toHaveLength(5);
+    });
+
+    test('clicking Hide details button changes the state', () => {
+        EventWrapper.setState({ collapsed: false });
+        EventWrapper.find('.hide-details-button').simulate('click');
         expect(EventWrapper.state('collapsed')).toBe(true);
-    })
+    });
+
+
+    
+    // // user can not view event details when clicking button
+    // test('user can collapse an event when clicking hide details button', () => {
+    //     const detailsButton = EventWrapper.find('button.details-btn');
+    //     expect(detailsButton.text()).toBe('Hide Details');
+    //     detailsButton.simulate('click');
+    //     expect(EventWrapper.state('collapsed')).toBe(true);
+    // })
 
 });

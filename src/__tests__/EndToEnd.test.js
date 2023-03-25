@@ -6,11 +6,11 @@ import puppeteer from 'puppeteer';
 describe('show/hide an event details', () => {
   let browser;
   let page;
+  jest.setTimeout(30000);
   beforeAll(async () => {
-    jest.setTimeout(30000);
     browser = await puppeteer.launch({
       //recommended to keep 'headless' mode on, until the very end. Takes alot longer to implement and run end-to-end tests when turned off
-      headless: false,
+      headless: true,
       slowMo: 250, //slow down by 250ms
       ignoreDefaultArgs: ['--disable-extensions'] //ignores default setting that causes timeout errors
     });
@@ -32,16 +32,15 @@ describe('show/hide an event details', () => {
 
   test('User can expand an event to see its details', async () => {
     //simulate the user clicking the event 'Details' button
-    await page.click('.event .details-btn');
+    await page.click('.event .details-button');
     //load event details
     const eventDetails = await page.$('.event .event__Details');
     //eventDetails uses .toBeDefined() matcher instead of toBeNull() because we want the details to exist here
     expect(eventDetails).toBeDefined();
-    browser.close();
   });
 
   test('User can collapse an event to hide its details', async () => {
-    await page.click('.event .details-btn');
+    await page.click('.event .hide-details-button');
     const eventDetails = await page.$('.event .event__Details');
     //.toBeNull() matcher is being used again to make sure the extra event details no longer exist
     expect(eventDetails).toBeNull();

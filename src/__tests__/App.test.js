@@ -96,7 +96,7 @@ describe('<App /> integration', () => {
   test('Filtered list of events matches mock data', async () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
-    NumberOfEventsWrapper.find('.number').simulate('change', {target: { value: 10 },});
+    NumberOfEventsWrapper.find('input.numberOfEvents_input').simulate('change', {target: { value: 10 },});
     await getEvents();
     expect(AppWrapper.state('events')).toEqual(mockData.slice(0, 10));
     AppWrapper.unmount();
