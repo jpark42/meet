@@ -11,7 +11,7 @@ class App extends Component {
     events: [],
     locations: [],
     selectedLocation: 'all',
-    numberOfEvents: 30
+    numberOfEvents: 30,
   };
 
   componentDidMount() {
@@ -39,14 +39,14 @@ class App extends Component {
   //This new method had to be defined in App because this is where the state is also defined. 
   //Can't directly change a component's state from outside of it in React
   updateEvents = (location, inputNumber) => {
-    const { eventCount, selectedLocation } = this.state;
+    const { numberOfEvents, selectedLocation } = this.state;
     if (location) {
       getEvents().then((events) => {
         //check if locationsEvents value is "all", otherwise filter the event list
         const locationEvents = (location === 'all') ? 
           events :
           events.filter((event) => event.location === location);
-        const eventsToShow = locationEvents.slice(0, eventCount);
+        const eventsToShow = locationEvents.slice(0, numberOfEvents);
         this.setState({
           events: eventsToShow,
           selectedLocation: location,
@@ -66,7 +66,6 @@ class App extends Component {
       })
     }
   }
-
 
 
   render() {
