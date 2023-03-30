@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+export default Event;
+
+
 class Event extends Component {
   state = { collapsed: true };
 
@@ -53,4 +56,3 @@ render() {
   )};
 };
 
-export default Event;

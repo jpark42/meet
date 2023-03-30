@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Event from './Event';
 
+export default EventList;
+
 class EventList extends Component {
   render() {
     const { events } = this.props;
@@ -16,4 +18,3 @@ class EventList extends Component {
   }
 }
 
-export default EventList;
