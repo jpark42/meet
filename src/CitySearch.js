@@ -6,7 +6,8 @@ class CitySearch extends Component {
   state = {
       query: '',
       suggestions: [],
-      showSuggestions: undefined
+      showSuggestions: undefined,
+      infoText: ''
   };
   //update the state after the text input changes
   handleInputChanged = (event) => {
@@ -24,9 +25,8 @@ class CitySearch extends Component {
     //if the list does return suggestions, then the infoText state is set to be empty, thus the alert staying hidden
     } else {
       return this.setState({
-        query: suggestions,
-        suggestions: [],
-        showSuggestions: false,
+        query: value,
+        suggestions,
         infoText: ''
       });
     }
@@ -34,7 +34,9 @@ class CitySearch extends Component {
   handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
-      showSuggestions: false
+      suggestions: [],
+      showSuggestions: false,
+      infoText: ''
     });
     //handItemClicked now async, being able to be used in testing
     this.props.updateEvents(suggestion);
