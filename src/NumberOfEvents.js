@@ -6,7 +6,7 @@ import { ErrorAlert } from "./Alert";
 class NumberOfEvents extends Component {
     state = {
     number: 30,
-    infoText: ''
+    errorText: ''
     };
 
     handleInputChange = (event) => {
@@ -19,11 +19,11 @@ class NumberOfEvents extends Component {
 
         if (inputValue < 1 || inputValue > 30) {
             this.setState({
-              infoText: 'Select number from 1 to 30',
+              errorText: 'Select number from 1 to 30',
             });
         } else {
             this.setState({
-              infoText: '',
+              errorText: '',
             });
         }
     };
@@ -39,7 +39,7 @@ class NumberOfEvents extends Component {
                     value={this.state.number}
                     onChange={this.handleInputChange}
                 />
-                <ErrorAlert text={this.state.infoText} />
+                <ErrorAlert text={this.state.errorText} />
             </div> 
         );
     }
