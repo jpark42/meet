@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { InfoAlert } from './Alert';
 
-export default CitySearch;
 
 class CitySearch extends Component {
   state = {
@@ -68,3 +67,4 @@ class CitySearch extends Component {
   }
 }
 
+export default CitySearch;
