@@ -24,7 +24,8 @@ class CitySearch extends Component {
     //if the list does return suggestions, then the infoText state is set to be empty, thus the alert staying hidden
     } else {
       return this.setState({
-        query: value,
+        query: suggestions,
+        suggestions: [],
         showSuggestions: false,
         infoText: ''
       });
