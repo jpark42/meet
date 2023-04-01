@@ -18,7 +18,14 @@ const isLocalhost = Boolean(
     window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 );
 
+//Checks for:
+  //1. Whether the environment is production or not
+  //2. Then checks whether a service worker is supported in the current browser before registering
 export function register(config) {
+  //Navigator is is the browser and operating system of the user
+  //Checks whether or not the user's browser will support service workers
+  //If it does support service workers, then register the service worker is registered. Only registers in the production environment
+  //If it does not support service workers, then the service worker isn't registered and allows the user to load a more basic version of the app
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
