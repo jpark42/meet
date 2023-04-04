@@ -4,8 +4,9 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import WelcomeScreen from './WelcomeScreen';
 import { WarningAlert } from './Alert';
-import { getEvents, extractLocations } from './api';
+import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 
 class App extends Component {
   state = {
@@ -13,16 +14,29 @@ class App extends Component {
     locations: [],
     selectedLocation: 'all',
     numberOfEvents: 30,
+    showWelcomeScreen: undefined
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
-    getEvents().then((events) => {
-      //update the state only if this.mounted = true
-      if (this.mounted) {
-        this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events) });
-      }
-    });
+    //get token from localStorage, where getToken() is called
+    const accessToken = localStorage.getItem('access_token');
+    //verify token by using checkToken(), a function that was exported from api.js
+    //if there is an error in the object returned by checkToken(), then it will return false; otherwise it will return true
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    //if no accessToken or valid token, user can still get access to list of events by getting a new authorization code by logging in
+    //this code will eventually be used to get a new accessToken after getEvents() is executed
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get("code");
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        //update the state only if this.mounted = true
+        if (this.mounted) {
+          this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events) });
+        }
+      });
+    };
   }
   
   componentWillUnmount() { 
@@ -70,6 +84,9 @@ class App extends Component {
 
 
   render() {
+    if (this.state.showWelcomeScreen === undefined) return <div
+      className="App" />
+
     const offlineMessage = navigator.onLine
       ? ''
       : 'The app has no connection to the internet. The information displayed may not be up-to-date.';
@@ -80,6 +97,7 @@ class App extends Component {
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
         <WarningAlert text={offlineMessage}/>
         <EventList events={this.state.events} />
+        <WelcomeScreen showWelcomeScreen={this.State.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
       </div>
     );
   }
