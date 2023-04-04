@@ -97,7 +97,7 @@ class App extends Component {
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
         <WarningAlert text={offlineMessage}/>
         <EventList events={this.state.events} />
-        <WelcomeScreen showWelcomeScreen={this.State.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
       </div>
     );
   }
