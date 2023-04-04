@@ -73,7 +73,15 @@ export const getEvents = async () => {
     return mockData;
 };
 
-  const token = await getAccessToken();
+//checks if user is offline or not. If offline, load data of events from cache of last login
+//this line of code is placed here because you don't need to check for token if the user is offline
+if (!navigator.onLine) {
+  const data = localStorage.getItem("lastEvents");
+  NProgress.done();
+  return data?JSON.parse(data).events:[];;
+}
+
+const token = await getAccessToken();
 
   if (token) {
     removeQuery();
