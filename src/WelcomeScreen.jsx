@@ -32,6 +32,7 @@ function WelcomeScreen(props) {
       <a
         href="https://jpark42.github.io/meet/privacy.html"
         rel="nofollow noopener"
+        className="privacy-link"
       >
         Privacy policy
       </a>
