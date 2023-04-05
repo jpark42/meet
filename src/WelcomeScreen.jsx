@@ -4,7 +4,8 @@ import "./WelcomeScreen.css";
 function WelcomeScreen(props) {
   return props.showWelcomeScreen ? (
     <div className="WelcomeScreen">
-      <h1>Welcome to the You Herd app</h1>
+      <img src="./logo-192.png" alt="you-herd-logo" />
+      <h1>Welcome to You Herd?</h1>
       <h4>
         Log in to see upcoming events around the world for full-stack developers
       </h4>
