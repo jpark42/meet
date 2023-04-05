@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 .App {
   text-align: center;
-  padding: 2% 5%;
+  /*padding: 2% 5%;*/
 }
 
 .App * {
@@ -85,6 +85,7 @@ input[type="number"] {
   position: relative;
 }
 
+/*
 .details-btn {
   position: absolute;
   right: 5px;
@@ -113,6 +114,7 @@ input[type="number"] {
 .description {
   overflow-x: hidden;
 }
+*/
 
 .numberOfEvents {
   width: 200px;
@@ -120,6 +122,19 @@ input[type="number"] {
   text-align: center;
 }
 
+@media only screen and (max-width: 767px) {
+  .numberOfEvents {
+    text-align: left !important;
+    padding-left: 10px;
+  }
+}
+
+.numberOfEvents_input {
+  width: 60px;
+  margin: 0px auto;
+}
+
+/*
 .button-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -211,3 +226,5 @@ input[type="number"] {
     margin: 0 auto;
   }
 }
+
+*/
