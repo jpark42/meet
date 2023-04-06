@@ -9,8 +9,8 @@ function WelcomeScreen(props) {
       <h4>
         Log in to see upcoming events around the world for full-stack
         developers.
-        <br>Follow the Herd!</br>
       </h4>
+      <h4>Follow the Herd!</h4>
       <div className="button_cont" align="center">
         <div className="google-btn">
           <div className="google-icon-wrapper">
