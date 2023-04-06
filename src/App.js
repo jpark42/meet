@@ -101,17 +101,19 @@ class App extends Component {
         <Row className='justify-content-start'>
         <img src="./logo-192.png" alt="you-herd-logo"/>
         </Row>
-        <Row className='d-flex flex-row mb-4'>
+        <Row>
           <Col className='col-12'>
             <WarningAlert text={offlineMessage}/>
           </Col>
-          <Col xs={12} md={6} xl={6}>
+        </Row>
+        <Row className='d-flex flex-row mb-4'>
+          <Col xs={12} md={6}>
             <CitySearch 
               locations={this.state.locations} 
               updateEvents={this.updateEvents} 
             /> 
           </Col>
-          <Col xs={12} md={6} xl={6} className='mx-1'>
+          <Col xs={12} md={6} className='mx-1'>
             <NumberOfEvents 
               numberOfEvents={this.state.numberOfEvents} 
               updateEvents={this.updateEvents}/>
