@@ -100,9 +100,9 @@ class App extends Component {
     return (
       <Container className='App mb-5 p-2'>
         <Row className='justify-content-start'>
-        <img src="../public/logo-192.png" alt="logo" className="img-fluid"/>
+        <img src="./logo-192.png" alt="you-herd-logo" className="img-fluid"/>
         </Row>
-        <Row className='d-flex flex-sm-column flex-row justify-content-md-between mb-4'>
+        <Row className='d-flex flex-row justify-content-md-between mb-4'>
           <Col className='col-12'>
             <WarningAlert text={offlineMessage}/>
           </Col>
@@ -112,7 +112,7 @@ class App extends Component {
               updateEvents={this.updateEvents} 
             /> 
           </Col>
-          <Col className='col-xs-12 mx-1'>
+          <Col className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 mx-1'>
             <NumberOfEvents 
               numberOfEvents={this.state.numberOfEvents} 
               updateEvents={this.updateEvents}/>
