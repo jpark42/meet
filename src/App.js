@@ -102,7 +102,7 @@ class App extends Component {
         <Row className='justify-content-start'>
         <img src="../public/logo-192.png" alt="logo" className="img-fluid"/>
         </Row>
-        <Row className='d-flex flex-md-row justify-content-md-between mb-4'>
+        <Row className='d-flex flex-row justify-content-md-between mb-4'>
           <Col className='col-12'>
             <WarningAlert text={offlineMessage}/>
           </Col>
