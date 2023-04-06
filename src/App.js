@@ -106,13 +106,13 @@ class App extends Component {
           <Col className='col-12'>
             <WarningAlert text={offlineMessage}/>
           </Col>
-          <Col className='col-md-6 col-sm-12'>
+          <Col className='col-xl-6 col-lg-6 col-md-6 col-sm-6'>
             <CitySearch 
               locations={this.state.locations} 
               updateEvents={this.updateEvents} 
             /> 
           </Col>
-          <Col className='col-md-6 col-sm-12 mx-1'>
+          <Col className='col-xs-12 mx-1'>
             <NumberOfEvents 
               numberOfEvents={this.state.numberOfEvents} 
               updateEvents={this.updateEvents}/>
