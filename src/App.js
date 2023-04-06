@@ -100,7 +100,7 @@ class App extends Component {
     return (
       <Container className='App mb-5 p-2'>
         <Row className='justify-content-start'>
-        <img src="./logo-192.png" alt="you-herd-logo" className="img-fluid"/>
+        <img src="./logo-192.png" alt="you-herd-logo"/>
         </Row>
         <Row className='d-flex flex-row justify-content-md-between mb-4'>
           <Col className='col-12'>
