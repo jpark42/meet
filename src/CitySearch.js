@@ -56,7 +56,6 @@ class CitySearch extends Component {
                 onChange={this.handleInputChanged}
                 placeholder="Search by city"
             />
-            <InfoAlert text={this.state.infoText} />
             <ul 
               className = {
                 this.state.showSuggestions
