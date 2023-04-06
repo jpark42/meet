@@ -12,7 +12,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';  
-import Figure from 'react-bootstrap/Figure';
 
 class App extends Component {
   state = {
@@ -102,17 +101,17 @@ class App extends Component {
         <Row className='justify-content-start'>
         <img src="./logo-192.png" alt="you-herd-logo"/>
         </Row>
-        <Row className='d-flex flex-row justify-content-md-between mb-4'>
+        <Row className='d-flex flex-row mb-4'>
           <Col className='col-12'>
             <WarningAlert text={offlineMessage}/>
           </Col>
-          <Col className='col-xl-6 col-lg-6 col-md-6 col-sm-6'>
+          <Col xs={12} md={6} xl={6}>
             <CitySearch 
               locations={this.state.locations} 
               updateEvents={this.updateEvents} 
             /> 
           </Col>
-          <Col className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 mx-1'>
+          <Col xs={12} md={6} xl={6} className='mx-1'>
             <NumberOfEvents 
               numberOfEvents={this.state.numberOfEvents} 
               updateEvents={this.updateEvents}/>
