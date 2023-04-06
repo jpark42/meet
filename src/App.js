@@ -8,6 +8,12 @@ import WelcomeScreen from './WelcomeScreen';
 import { WarningAlert } from './Alert';
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';  
+import Figure from 'react-bootstrap/Figure';
+
 class App extends Component {
   state = {
     events: [],
@@ -92,13 +98,40 @@ class App extends Component {
       : 'The app has no connection to the internet. The information displayed may not be up-to-date.';
 
     return (
-      <div className="App">
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} /> 
-        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
-        <WarningAlert text={offlineMessage}/>
+      <Container className='App mb-5 p-2'>
+        <Figure>
+          <Figure.Image
+            width={192}
+            height={192}
+            alt="192x192"
+            src="../public/logo-192.png"
+          />
+        </Figure>
+        <Row className='d-flex flex-md-row flex-column-reverse justify-content-md-between mb-4'>
+          <Col className='col-12'>
+            <WarningAlert text={offlineMessage}/>
+          </Col>
+          <Col className='col-6'>
+            <CitySearch 
+              locations={this.state.locations} 
+              updateEvents={this.updateEvents} 
+            /> 
+          </Col>
+          <Col className='col-6 mx-1'>
+            <NumberOfEvents 
+              numberOfEvents={this.state.numberOfEvents} 
+              updateEvents={this.updateEvents}/>
+          </Col>
+        </Row>
+
         <EventList events={this.state.events} />
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
-      </div>
+        <WelcomeScreen 
+          showWelcomeScreen={this.state.showWelcomeScreen}
+          getAccessToken={() => { 
+            getAccessToken() 
+          }} 
+        />
+      </Container>
     );
   }
 }

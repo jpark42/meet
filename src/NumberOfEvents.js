@@ -19,7 +19,7 @@ class NumberOfEvents extends Component {
 
         if (inputValue < 1 || inputValue > 30) {
             this.setState({
-              errorText: 'Select number from 1 to 30',
+              errorText: 'Baa please select number from 1 to 30',
             });
         } else {
             this.setState({
@@ -31,7 +31,8 @@ class NumberOfEvents extends Component {
  
     render() {
         return (
-            <div className="NumberOfEvents">
+            <div className="NumberOfEvents d-flex flex-column">
+                <label for="numberOfEvent_input">Number of Events:</label>/
                 <input
                     id="numberOfEvents_input"
                     type="number"

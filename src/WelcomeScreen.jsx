@@ -7,7 +7,8 @@ function WelcomeScreen(props) {
       <img src="./logo-192.png" alt="you-herd-logo" />
       <h1>Welcome to You Herd?</h1>
       <h4>
-        Log in to see upcoming events around the world for full-stack developers
+        Log in to see upcoming events around the world for full-stack
+        developers. Follow the Herd!
       </h4>
       <div className="button_cont" align="center">
         <div className="google-btn">

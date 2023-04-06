@@ -26,6 +26,7 @@ class InfoAlert extends Alert {
     constructor(props) {
       super(props);
       this.color = 'blue';
+      this.width = '230px';
     }
 }
 
