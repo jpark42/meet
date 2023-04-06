@@ -8,7 +8,8 @@ function WelcomeScreen(props) {
       <h1>Welcome to You Herd?</h1>
       <h4>
         Log in to see upcoming events around the world for full-stack
-        developers. Follow the Herd!
+        developers.
+        <br>Follow the Herd!</br>
       </h4>
       <div className="button_cont" align="center">
         <div className="google-btn">

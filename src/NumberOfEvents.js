@@ -31,12 +31,12 @@ class NumberOfEvents extends Component {
  
     render() {
         return (
-            <div className="NumberOfEvents d-flex flex-column">
-                <label for="numberOfEvent_input">Number of Events:</label>
+            <div className="NumberOfEvents">
+                <label htmlFor="numberOfEvent_input" className="d-inline">Number of Events:</label>
                 <input
                     id="numberOfEvents_input"
                     type="number"
-                    className="numberOfEvents_input"
+                    className="numberOfEvents_input d-inline"
                     value={this.state.number}
                     onChange={this.handleInputChange}
                 />
