@@ -32,7 +32,7 @@ class NumberOfEvents extends Component {
     render() {
         return (
             <div className="NumberOfEvents d-flex flex-column">
-                <label for="numberOfEvent_input">Number of Events:</label>/
+                <label for="numberOfEvent_input">Number of Events:</label>
                 <input
                     id="numberOfEvents_input"
                     type="number"

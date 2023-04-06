@@ -99,15 +99,10 @@ class App extends Component {
 
     return (
       <Container className='App mb-5 p-2'>
-        <Figure>
-          <Figure.Image
-            width={192}
-            height={192}
-            alt="192x192"
-            src="../public/logo-192.png"
-          />
-        </Figure>
-        <Row className='d-flex flex-md-row flex-column-reverse justify-content-md-between mb-4'>
+        <Row className='justify-content-start'>
+        <img src="../public/logo-192.png" alt="logo" className="img-fluid"/>
+        </Row>
+        <Row className='d-flex flex-md-row justify-content-md-between mb-4'>
           <Col className='col-12'>
             <WarningAlert text={offlineMessage}/>
           </Col>
