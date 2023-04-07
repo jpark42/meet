@@ -98,8 +98,10 @@ class App extends Component {
 
     return (
       <Container className='App mb-5 p-2'>
-        <Row className='justify-content-center'>
-        <img src="./logo-192.png" class="logo" alt="you-herd-logo"/>
+        <Row style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ maxWidth: '192px', margin: '0 auto' }}>
+            <img src="./logo-192.png" className="logo" alt="you-herd-logo" />
+          </div>
         </Row>
         <Row>
           <Col className='col-12'>
