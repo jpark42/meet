@@ -9,8 +9,7 @@
 }
 
 .logo {
-  height: 192px;
-  width: 192px;
+  justify-content: center;
 }
 
 .event {
