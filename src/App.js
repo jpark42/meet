@@ -98,7 +98,7 @@ class App extends Component {
 
     return (
       <Container className='App mb-5 p-2'>
-        <Row className='justify-content-start w-25'>
+        <Row className='justify-content-center w-25'>
         <img src="./logo-192.png" className='logo' alt="you-herd-logo"/>
         </Row>
         <Row>
