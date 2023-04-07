@@ -99,7 +99,7 @@ class App extends Component {
     return (
       <Container className='App mb-5 p-2'>
         <Row className='justify-content-start'>
-        <img src="./logo-192.png" alt="you-herd-logo"/>
+        <img src="./logo-192.png" class="logo" alt="you-herd-logo"/>
         </Row>
         <Row>
           <Col className='col-12'>
@@ -113,7 +113,7 @@ class App extends Component {
               updateEvents={this.updateEvents} 
             /> 
           </Col>
-          <Col xs={12} md={6} className='mx-1'>
+          <Col xs={12} md={6}>
             <NumberOfEvents 
               numberOfEvents={this.state.numberOfEvents} 
               updateEvents={this.updateEvents}/>

@@ -32,7 +32,7 @@ class NumberOfEvents extends Component {
     render() {
         return (
             <div className="NumberOfEvents">
-                <label htmlFor="numberOfEvent_input" className="d-inline">Number of Events: </label>
+                <label htmlFor="numberOfEvents_input" className="d-inline">Number of Events: </label>
                 <input
                     id="numberOfEvents_input"
                     type="number"

@@ -8,6 +8,11 @@
   box-sizing: border-box;
 }
 
+.logo {
+  width: 192px;
+  height: 192px
+}
+
 .event {
   padding: 10px 10px 35px;
   margin-bottom: 10px;
@@ -81,6 +86,26 @@ input[type="number"] {
   max-width: 300px;
   margin: auto;
   position: relative;
+}
+
+.numberOfEvents {
+  width: 200px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+/*
+@media only screen and (max-width: 767px) {
+  .numberOfEvents {
+    text-align: left !important;
+    padding-left: 10px;
+  }
+}
+*/
+
+.numberOfEvents_input {
+  width: 60px;
+  margin: 0px auto;
 }
 
 .suggestions {
@@ -161,23 +186,7 @@ input[type="number"] {
   padding: 5px 15px;
 }
 
-.numberOfEvents {
-  width: 200px;
-  margin: 20px auto;
-  text-align: center;
-}
 
-@media only screen and (max-width: 767px) {
-  .numberOfEvents {
-    text-align: left !important;
-    padding-left: 10px;
-  }
-}
-
-.numberOfEvents_input {
-  width: 60px;
-  margin: 0px auto;
-}
 
 /*
 .button-wrapper {
