@@ -98,8 +98,8 @@ class App extends Component {
 
     return (
       <Container className='App mb-5 p-2'>
-        <Row className='justify-content-start w-auto'>
-        <img src="./logo-192.png" class="logo" alt="you-herd-logo"/>
+        <Row className='justify-content-start w-10'>
+        <img src="./logo-512.png" alt="you-herd-logo"/>
         </Row>
         <Row>
           <Col className='col-12'>
