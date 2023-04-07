@@ -9,8 +9,11 @@
 }
 
 .logo {
-  justify-content: center;
-}
+  max-width: 100%; 
+  height: auto; 
+  display: block; 
+  margin: 0 auto; 
+  }
 
 .event {
   padding: 10px 10px 35px;
