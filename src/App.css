@@ -8,11 +8,9 @@
   box-sizing: border-box;
 }
 
-/*
 .logo {
-  width: auto;
+  height:300px
 }
-*/
 
 .event {
   padding: 10px 10px 35px;
