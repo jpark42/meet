@@ -21,12 +21,15 @@ class CitySearch extends Component {
       ;})
       //if the list of suggestions returns 0 events, then have infoText state show message that the app cant find a city and to try again
       if (suggestions.length === 0) {
+        console.log(value);
         this.setState({ 
           query: value,
           infoText: 'Baa we cannot find the city you are looking for. Please try another city or check your spelling.'
         });
       //if the list does return suggestions, then the infoText state is set to be empty, thus the alert staying hidden
       } else {
+        //I think the error is coming here??
+        console.log(value);
         return this.setState({
           query: value,
           suggestions,
