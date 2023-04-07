@@ -113,7 +113,7 @@ class App extends Component {
               updateEvents={this.updateEvents} 
             /> 
           </Col>
-          <Col xs={12} md={6}>
+          <Col xs={12} md={6} className="mx-1">
             <NumberOfEvents 
               numberOfEvents={this.state.numberOfEvents} 
               updateEvents={this.updateEvents}/>
