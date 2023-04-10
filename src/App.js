@@ -13,6 +13,10 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';  
 
+import {
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+} from 'recharts';
+
 class App extends Component {
   state = {
     events: [],
@@ -29,6 +33,8 @@ class App extends Component {
     //verify token by using checkToken(), a function that was exported from api.js
     //if there is an error in the object returned by checkToken(), then it will return false; otherwise it will return true
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+
+
     //if no accessToken or valid token, user can still get access to list of events by getting a new authorization code by logging in
     //this code will eventually be used to get a new accessToken after getEvents() is executed
     const searchParams = new URLSearchParams(window.location.search);
@@ -87,10 +93,27 @@ class App extends Component {
     }
   }
 
+  //Logic for getting data for ScatterChart
+    //uses locations and events already saved in state
+    //mapping locations and filter the events by each location to get the length of the resulting array
+    //using split() function to split the location at the occurrence of a comma followed by a space ", ", which will return an array
+    //using shift() array function then to get the first element in the array, which is the name of the city
+    //data being returned will be an array with an object of {city, number}
+  getData = () => {
+    const {locations, events} = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter(
+        (event) => event.location === location).length;
+      const city = location.split(', ').shift();
+      return {city, number};
+    });
+    return data;
+  };
+
 
   render() {
-    if (this.state.showWelcomeScreen === undefined) return <div
-      className="App" />
+    if (this.state.showWelcomeScreen === undefined) 
+      return <div className="App" />
 
     const offlineMessage = navigator.onLine
       ? ''
@@ -119,6 +142,36 @@ class App extends Component {
             <NumberOfEvents 
               numberOfEvents={this.state.numberOfEvents} 
               updateEvents={this.updateEvents}/>
+          </Col>
+        </Row>
+        <Row className='data-visualisation-container d-flex flex-column flex-md-row'>
+          <Col className='ScatterChart col-12 col-lg-8 text-center'>
+            <ResponsiveContainer height={400}>
+              <ScatterChart
+                margin={{
+                  top: 20,
+                  right: 20,
+                  bottom: 20,
+                  left: 20,
+                }}
+              >
+                <CartesianGrid strokeDasharray='3 3' />
+                <XAxis 
+                  type='category' 
+                  dataKey='city' 
+                  name='city' 
+                />
+                <YAxis
+                  type='number'
+                  dataKey='number'
+                  name='number of events'
+                  allowDecimals={false}
+                />
+
+                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                <Scatter data={this.getData()} fill='#2197F3' />
+              </ScatterChart>
+            </ResponsiveContainer>
           </Col>
         </Row>
 

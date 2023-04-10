@@ -14,6 +14,7 @@ class CitySearch extends Component {
   handleInputChanged = (event) => {
     const value = event.target.value;
 
+    //currently have an error where the searchbar cannot be cleared. 1 letter always remains and can't be deleted
     if (value.length > 0 ) {
       this.setState({showSuggestions:true});
       const suggestions = this.props.locations.filter((location) => {
@@ -28,8 +29,6 @@ class CitySearch extends Component {
         });
       //if the list does return suggestions, then the infoText state is set to be empty, thus the alert staying hidden
       } else {
-        //I think the error is coming here??
-        console.log(value);
         return this.setState({
           query: value,
           suggestions,
