@@ -12,29 +12,35 @@ class CitySearch extends Component {
   };
   //update the state after the text input changes
   handleInputChanged = (event) => {
-    const value = event.target.value;
+    const query = event.target.value;
 
     //currently have an error where the searchbar cannot be cleared. 1 letter always remains and can't be deleted
-    if (value.length > 0 ) {
+    if (query.length > 0 ) {
       this.setState({showSuggestions:true});
       const suggestions = this.props.locations.filter((location) => {
-        return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
+        return location.toUpperCase().indexOf(query.toUpperCase()) > -1;
       ;})
       //if the list of suggestions returns 0 events, then have infoText state show message that the app cant find a city and to try again
       if (suggestions.length === 0) {
-        console.log(value);
+        console.log(query);
         this.setState({ 
-          query: value,
+          query,
           infoText: 'Baa we cannot find the city you are looking for. Please try another city or check your spelling.'
         });
       //if the list does return suggestions, then the infoText state is set to be empty, thus the alert staying hidden
       } else {
-        return this.setState({
-          query: value,
+        this.setState({
+          query,
           suggestions,
           infoText: ''
         });
       }
+    } else {
+      this.setState({
+        query: '',
+        infoText: '',
+        suggestions: this.props.locations
+      })
     }
   };
   handleItemClicked = (suggestion) => {
