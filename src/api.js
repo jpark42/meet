@@ -1,8 +1,8 @@
-import { mockData } from './mock-data';
-import axios from 'axios';
+import { mockData } from "./mock-data";
+import axios from "axios";
 //Package that creates and displays progress bars at the top of the page
 //can show users that app is loading data when trying to access Google Calendar API
-import NProgress from 'nprogress';
+import NProgress from "nprogress";
 
 /**
  *
@@ -13,11 +13,10 @@ import NProgress from 'nprogress';
  * The Set will remove all duplicates from the array.
  */
 export const extractLocations = (events) => {
-    var extractLocations = events.map((event) => event.location);
-    var locations = [...new Set(extractLocations)];
-    return locations;
-  };
-
+  var extractLocations = events.map((event) => event.location);
+  var locations = [...new Set(extractLocations)];
+  return locations;
+};
 
 //takes accessToken you found and checks if its a valid token. If not, it redirects you to the Google Authorization screen
 export const checkToken = async (accessToken) => {
@@ -33,7 +32,6 @@ export const checkToken = async (accessToken) => {
   return result;
 };
 
-
 //Checks if there is a path, then build the URL with the current path (or build the URL without a path using window.historypushState())
 const removeQuery = () => {
   if (window.history.pushState && window.location.pathname) {
@@ -42,17 +40,16 @@ const removeQuery = () => {
   } else {
     newurl = `${window.location.protocol}//${window.location.host}`;
     window.history.pushState("", "", newurl);
-  };
+  }
 };
 
 //get new token if a token doesnt exist or is invalid
 //This function takes your code and encodes it using encodeURIComponent, then uses the encoded code to get your token.
 const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code);
-  const getTokenLambdaEP = 'https://geyqndkg8l.execute-api.us-east-1.amazonaws.com/dev/api/token';
-  const { access_token } = await fetch(
-    `${getTokenLambdaEP}/${encodeCode}`
-  )
+  const getTokenLambdaEP =
+    "https://geyqndkg8l.execute-api.us-east-1.amazonaws.com/dev/api/token";
+  const { access_token } = await fetch(`${getTokenLambdaEP}/${encodeCode}`)
     .then((res) => {
       return res.json();
     })
@@ -63,30 +60,31 @@ const getToken = async (code) => {
   return access_token;
 };
 
-  
 //function doesnt current have any async code yet, but will add ajax request to proper serverless endpoint later
 export const getEvents = async () => {
   NProgress.start();
 
-  if (window.location.href.startsWith('http://localhost')) { //if using localhost: return mockData, else: real API data
+  if (window.location.href.startsWith("http://localhost")) {
+    //if using localhost: return mockData, else: real API data
     NProgress.done();
     return mockData;
-};
+  }
 
-//checks if user is offline or not. If offline, load data of events from cache of last login
-//this line of code is placed here because you don't need to check for token if the user is offline
-if (!navigator.onLine) {
-  const data = localStorage.getItem("lastEvents");
-  NProgress.done();
-  return data?JSON.parse(data).events:[];;
-}
+  //checks if user is offline or not. If offline, load data of events from cache of last login
+  //this line of code is placed here because you don't need to check for token if the user is offline
+  if (!navigator.onLine) {
+    const data = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return data ? JSON.parse(data).events : [];
+  }
 
-const token = await getAccessToken();
+  const token = await getAccessToken();
 
   if (token) {
     removeQuery();
-    const getEventsLambdaEP = 'https://geyqndkg8l.execute-api.us-east-1.amazonaws.com/dev/api/get-events';
-    const url =  `${getEventsLambdaEP}/${token}`;
+    const getEventsLambdaEP =
+      "https://geyqndkg8l.execute-api.us-east-1.amazonaws.com/dev/api/get-events";
+    const url = `${getEventsLambdaEP}/${token}`;
     const result = await axios.get(url);
     if (result.data) {
       // send events to extractLocations() to get all available locations
@@ -97,20 +95,16 @@ const token = await getAccessToken();
     }
     NProgress.done();
     return result.data.events;
-  };
+  }
 };
 
 //
 export const getAccessToken = async () => {
   // check if token exists in local storage of the user
-  const accessToken = localStorage.getItem('access_token');
-
-  //check if an accessToken is found. If no token found, then check for authorization code
-  //if no authorization code found, user is automatically redirected to the Google Authorization screen, where they can sign in again and retrieve their code
-  const tokenCheck = accessToken && (await checkToken(accessToken));
+  let accessToken = localStorage.getItem("access_token");
 
   // if token is not found or is not valid
-  if (!accessToken || tokenCheck.error) {
+  if (!accessToken) {
     // remove any version of the token if it exists
     await localStorage.removeItem("access_token");
     // check for authorization code
@@ -123,10 +117,15 @@ export const getAccessToken = async () => {
       );
       const { authUrl } = results.data;
       return (window.location.href = authUrl);
-    };
-    return code && getToken(code);
-  };
-  return accessToken;
-    
-};
+    }
+    accessToken = getToken(code);
 
+    //check if an accessToken is found. If no token found, then check for authorization code
+    //if no authorization code found, user is automatically redirected to the Google Authorization screen, where they can sign in again and retrieve their code
+    const tokenCheck = await checkToken(accessToken);
+
+    if (!tokenCheck) return getAccessToken();
+  }
+
+  return accessToken;
+};
