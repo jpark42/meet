@@ -118,7 +118,7 @@ export const getAccessToken = async () => {
       const { authUrl } = results.data;
       return (window.location.href = authUrl);
     }
-    accessToken = getToken(code);
+    accessToken = await getToken(code);
 
     //check if an accessToken is found. If no token found, then check for authorization code
     //if no authorization code found, user is automatically redirected to the Google Authorization screen, where they can sign in again and retrieve their code

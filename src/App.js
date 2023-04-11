@@ -35,7 +35,7 @@ class App extends Component {
   async componentDidMount() {
     this.mounted = true;
     //get token from localStorage, where getToken() is called
-    const accessToken = getAccessToken();
+    const accessToken = await getAccessToken();
     //verify token by using checkToken(), a function that was exported from api.js
     //if there is an error in the object returned by checkToken(), then it will return false; otherwise it will return true
     const isTokenValid = accessToken
