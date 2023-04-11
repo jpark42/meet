@@ -30,7 +30,7 @@ class CitySearch extends Component {
     //Suggestions are then filtered using 'indexOf' method of 'location' array, which returns the index of the first occurrence of a specified value in a string
     //toUpperCase() coverts both query and location strings to uppercase to ensure the comparison is case insensitive
     if (query.length > 0) {
-      this.suggestionsUL.current.styles.display = "block";
+      this.suggestionsUL.current.style.display = "block";
       this.setState({ showSuggestions: true });
       const suggestions = this.props.locations.filter((location) => {
         return location.toUpperCase().indexOf(query.toUpperCase()) > -1;
@@ -95,7 +95,6 @@ class CitySearch extends Component {
   //onClick event listener for the CitySearch bar
   //When clicking outside of the searchbar, suggestions will be hidden
   handleClickAway = (events) => {
-    console.logs(events);
     console.log("click away from search bar to stop showing suggestions");
     this.suggestionsUL.current.style.display = "none";
   };
@@ -120,7 +119,7 @@ class CitySearch extends Component {
                 : "display-none"
             }
           >
-            <li className={this.state.infoText === "" && "display-none"}>
+            <li className={this.state.infoText === "" ? "display-none" : ""}>
               <InfoAlert text={this.state.infoText} />
             </li>
             {this.state.suggestions.map((suggestion) => (

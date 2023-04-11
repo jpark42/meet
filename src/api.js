@@ -18,7 +18,12 @@ export const extractLocations = (events) => {
   return locations;
 };
 
-//takes accessToken you found and checks if its a valid token. If not, it redirects you to the Google Authorization screen
+/**
+ * takes accessToken you found and checks if its a valid token. If not, it redirects you to the Google Authorization screen
+ * @param {*} accessToken
+ * @type (acessToken: string) => Promise<Object>
+ * @returns Object
+ */
 export const checkToken = async (accessToken) => {
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
@@ -98,7 +103,11 @@ export const getEvents = async () => {
   }
 };
 
-//
+/**
+ * this function will try to get the token from localstorage and validate it
+ * if the token is not present, it will redirect to the login page
+ * @returns string
+ */
 export const getAccessToken = async () => {
   // check if token exists in local storage of the user
   let accessToken = localStorage.getItem("access_token");
