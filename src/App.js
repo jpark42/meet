@@ -34,31 +34,34 @@ class App extends Component {
 
   async componentDidMount() {
     this.mounted = true;
-    //get token from localStorage, where getToken() is called
-    const accessToken = await getAccessToken();
+    //as soon as app loads, app should get token from localStorage, where getToken() is called
+    const accessToken = localStorage.getItem("access_token");
+
     //verify token by using checkToken(), a function that was exported from api.js
     //if there is an error in the object returned by checkToken(), then it will return false; otherwise it will return true
-    const isTokenValid = accessToken
-      ? (await checkToken(accessToken)).error
-        ? false
-        : true
-      : false;
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
 
     //if no accessToken or valid token, user can still get access to list of events by getting a new authorization code by logging in
     //this code will eventually be used to get a new accessToken after getEvents() is executed
     const searchParams = new URLSearchParams(window.location.search);
+
+    //look for authorization code
     const code = searchParams.get("code");
-    console.log(code);
-    console.log(isTokenValid);
-    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-    if ((code || isTokenValid) && this.mounted) {
+
+    //Check if you are running site locally or not
+    const isLocal = window.location.href.startsWith("http://localhost")
+      ? true
+      : code || isTokenValid;
+
+    //set state to show welcomeScreen if not runnning locally
+    this.setState({ showWelcomeScreen: !isLocal });
+
+    //if running locally, skip welcomeScreen and show list of events
+    if (isLocal && this.mounted) {
       getEvents().then((events) => {
-        //update the state only if this.mounted = true
         if (this.mounted) {
-          this.setState({
-            events: events.slice(0, this.state.numberOfEvents),
-            locations: extractLocations(events),
-          });
+          events = events.slice(0, this.state.numberOfEvents);
+          this.setState({ events, locations: extractLocations(events) });
         }
       });
     }

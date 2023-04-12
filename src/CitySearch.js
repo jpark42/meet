@@ -16,7 +16,6 @@ class CitySearch extends Component {
       showSuggestions: undefined,
       infoText: "",
     };
-    this.handleClickAway = this.handleClickAway.bind(this);
   }
 
   //update the state after the text input changes
@@ -86,7 +85,7 @@ class CitySearch extends Component {
       infoText: "",
     });
 
-    this.handleClickAway();
+    this.hideDropDown();
 
     //calling updateEvents function passed as a prop from App.js
     //updates the events displayed in the app based on the selected city
@@ -96,14 +95,14 @@ class CitySearch extends Component {
 
   //onClick event listener for the CitySearch bar
   //When clicking outside of the searchbar, suggestions will be hidden
-  handleClickAway = () => {
+  hideDropDown = () => {
     console.log("click away from search bar to stop showing suggestions");
     this.suggestionsUL.current.style.display = "none";
   };
 
   render() {
     return (
-      <ClickAwayListener onClickAway={this.handleClickAway}>
+      <ClickAwayListener onClickAway={this.hideDropDown}>
         <div className="CitySearch">
           <input
             type="text"

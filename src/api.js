@@ -111,25 +111,27 @@ export const getAccessToken = async () => {
   // check if token exists in local storage of the user
   let accessToken = localStorage.getItem("access_token");
 
-  // if token is not found or is not valid
+  //check if an accessToken is found. If no token found, then check for authorization code
   if (!accessToken) {
     // remove any version of the token if it exists
     await localStorage.removeItem("access_token");
     // check for authorization code
     const searchParams = new URLSearchParams(window.location.search);
     const code = await searchParams.get("code");
-    // if no authorization code is found, user is redirected to Google Auth screen where they can sign in and receive their code
+    // if no authorization code is found, user is redirected to Google Auth screen where they can sign in and receive their authorization code
     if (!code) {
       const results = await axios.get(
         "https://geyqndkg8l.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url"
       );
       const { authUrl } = results.data;
+      //if no access token, redirects to google sign in page
       return (window.location.href = authUrl);
     }
+
+    //uses authorization code to get a new access token
     accessToken = await getToken(code);
 
-    //check if an accessToken is found. If no token found, then check for authorization code
-    //if no authorization code found, user is automatically redirected to the Google Authorization screen, where they can sign in again and retrieve their code
+    //checks if the token you just got is a valid accessToken
     const tokenCheck = await checkToken(accessToken);
 
     if (!tokenCheck) return getAccessToken();
