@@ -65,7 +65,6 @@ const getToken = async (code) => {
   return access_token;
 };
 
-//function doesnt current have any async code yet, but will add ajax request to proper serverless endpoint later
 export const getEvents = async () => {
   NProgress.start();
 

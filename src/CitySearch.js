@@ -86,6 +86,8 @@ class CitySearch extends Component {
       infoText: "",
     });
 
+    this.handleClickAway();
+
     //calling updateEvents function passed as a prop from App.js
     //updates the events displayed in the app based on the selected city
     //by passing the selected 'suggestion' as an argument to updateEvents(), App.js can use this city name to fetch relevant events and update its state accordingly
@@ -94,7 +96,7 @@ class CitySearch extends Component {
 
   //onClick event listener for the CitySearch bar
   //When clicking outside of the searchbar, suggestions will be hidden
-  handleClickAway = (events) => {
+  handleClickAway = () => {
     console.log("click away from search bar to stop showing suggestions");
     this.suggestionsUL.current.style.display = "none";
   };
