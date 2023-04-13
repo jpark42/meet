@@ -147,6 +147,12 @@ class App extends Component {
             <img src="./logo-192.png" className="logo" alt="you-herd-logo" />
           </div>
         </Row>
+        <Row className="slogan">
+          <div className="font" style={{ fontWeight: "bold" }}>
+            <br />
+            <p>Follow the herd! Find tech events near you!</p>
+          </div>
+        </Row>
         <Row>
           <Col className="col-12">
             <WarningAlert text={offlineMessage} />
@@ -181,18 +187,12 @@ class App extends Component {
                 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis
-                  allowDataOverflow
-                  type="category"
-                  dataKey="city"
-                  name="City"
-                />
+                <XAxis type="category" dataKey="city" name="City" />
                 <YAxis
                   type="number"
                   dataKey="number"
                   name="Number of Events"
                   allowDecimals={false}
-                  allowDataOverflow
                 />
 
                 <Tooltip />
