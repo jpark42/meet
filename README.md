@@ -2,7 +2,7 @@
 <h2>Deployed at https://jpark42.github.io/meet/</h2>
 
 <h2>Description</h2>
-  <p>You Herd? is a serverless, proof-of-concept progressive web app that lets you search for concert events in your city. A user can expect to see how many events are happening in a particular city and timeframe, and the details of those events.
+  <p>You Herd? is a serverless, proof-of-concept progressive web app that lets you search for tech events in your city. A user can expect to see how many events are happening in a particular city and timeframe, and the details of those events.
   The React app utilizes Google Calendar API and OAuth2 authentication to fetch upcoming events.</p>
   
 <h2>Key Features</h2>
