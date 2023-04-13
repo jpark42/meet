@@ -5,6 +5,7 @@ import EventList from "./EventList";
 import CitySearch from "./CitySearch";
 import NumberOfEvents from "./NumberOfEvents";
 import WelcomeScreen from "./WelcomeScreen";
+import EventGenre from "./EventGenre";
 import { WarningAlert } from "./Alert";
 import { getEvents, extractLocations, checkToken, getAccessToken } from "./api";
 
@@ -166,7 +167,10 @@ class App extends Component {
           </Col>
         </Row>
         <Row className="data-visualisation-container d-flex flex-column flex-md-row">
-          <Col className="ScatterChart col-12 col-lg-8 text-center">
+          <Col lg={4} className="PieChart text-center">
+            <EventGenre events={this.state.events} />
+          </Col>
+          <Col lg={8} className="ScatterChart text-center">
             <ResponsiveContainer height={400}>
               <ScatterChart
                 margin={{
@@ -177,16 +181,22 @@ class App extends Component {
                 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="category" dataKey="city" name="city" />
+                <XAxis
+                  allowDataOverflow
+                  type="category"
+                  dataKey="city"
+                  name="City"
+                />
                 <YAxis
                   type="number"
                   dataKey="number"
-                  name="number of events"
+                  name="Number of Events"
                   allowDecimals={false}
+                  allowDataOverflow
                 />
 
-                <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-                <Scatter data={this.getData()} fill="#2197F3" />
+                <Tooltip />
+                <Scatter data={this.getData()} fill="#0066ff" />
               </ScatterChart>
             </ResponsiveContainer>
           </Col>
