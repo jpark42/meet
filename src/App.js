@@ -152,21 +152,21 @@ class App extends Component {
             <WarningAlert text={offlineMessage} />
           </Col>
         </Row>
-        <Row className="d-flex flex-row mb-4">
-          <Col xs={12} md={6}>
+        <Row className="d-flex flex-row mb-2">
+          <Col xs={12} md={6} className="mt-3">
             <CitySearch
               locations={this.state.locations}
               updateEvents={this.updateEvents}
             />
           </Col>
-          <Col xs={12} md={6}>
+          <Col xs={12} md={6} className="mt-3">
             <NumberOfEvents
               numberOfEvents={this.state.numberOfEvents}
               updateEvents={this.updateEvents}
             />
           </Col>
         </Row>
-        <Row className="data-visualisation-container d-flex flex-column flex-md-row">
+        <Row className="data-visualisation-container d-flex flex-column flex-md-row my-4">
           <Col lg={4} className="PieChart text-center">
             <EventGenre events={this.state.events} />
           </Col>

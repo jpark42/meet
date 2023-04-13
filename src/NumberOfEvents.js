@@ -1,49 +1,48 @@
 import React, { Component } from "react";
 import { ErrorAlert } from "./Alert";
 
-
-
 class NumberOfEvents extends Component {
-    state = {
+  state = {
     number: 30,
-    errorText: ''
-    };
+    errorText: "",
+  };
 
-    handleInputChange = (event) => {
-        let inputValue = event.target.value;
+  handleInputChange = (event) => {
+    let inputValue = event.target.value;
 
-        this.props.updateEvents(null, inputValue);
-        this.setState({ 
-            number: inputValue
-        });
+    this.props.updateEvents(null, inputValue);
+    this.setState({
+      number: inputValue,
+    });
 
-        if (inputValue < 1 || inputValue > 30) {
-            this.setState({
-              errorText: 'Baa please select number from 1 to 30',
-            });
-        } else {
-            this.setState({
-              errorText: '',
-            });
-        }
-    };
-    
- 
-    render() {
-        return (
-            <div className="NumberOfEvents">
-                <label htmlFor="numberOfEvents_input" className="d-inline">Number of Events: </label>
-                <input
-                    id="numberOfEvents_input"
-                    type="number"
-                    className="numberOfEvents_input d-inline"
-                    value={this.state.number}
-                    onChange={this.handleInputChange}
-                />
-                <ErrorAlert text={this.state.errorText} />
-            </div> 
-        );
+    if (inputValue < 1 || inputValue > 30) {
+      this.setState({
+        errorText: "Baa please select number from 1 to 30",
+      });
+    } else {
+      this.setState({
+        errorText: "",
+      });
     }
+  };
+
+  render() {
+    return (
+      <div className="NumberOfEvents">
+        <label htmlFor="numberOfEvents_input" className="d-inline font">
+          Number of Events:{" "}
+        </label>
+        <input
+          id="numberOfEvents_input"
+          type="number"
+          className="numberOfEvents_input d-inline"
+          value={this.state.number}
+          onChange={this.handleInputChange}
+        />
+        <ErrorAlert text={this.state.errorText} />
+      </div>
+    );
+  }
 }
 
 export default NumberOfEvents;
